@@ -1,5 +1,8 @@
 out/
 .jdk/
 .jdk-download/
+.javafx/
+.javafx-download/
 assets/source/
 *.class
+hs_err_pid*.log

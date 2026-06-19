@@ -41,16 +41,7 @@ public final class ShadowClash {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Shadow Clash - Java Fighting Game");
-            GamePanel panel = new GamePanel();
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setContentPane(panel);
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-            panel.start();
-        });
+        ShadowClashFX.main(args);
     }
 }
 

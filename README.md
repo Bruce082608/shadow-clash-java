@@ -1,6 +1,6 @@
 # Shadow Clash
 
-一个使用 Java Swing / Java2D 制作的横版 2D 格斗小游戏原型，包含双人本地对战和玩家打电脑两种模式。项目不复用《死神 vs 火影》的角色、音乐或原作素材，只参考横版格斗的操作节奏和表现方式。
+一个使用 JavaFX Canvas 制作的横版 2D 格斗小游戏原型，包含双人本地对战和玩家打电脑两种模式。项目不复用《死神 vs 火影》的角色、音乐或原作素材，只参考横版格斗的操作节奏和表现方式。
 
 ## 功能
 
@@ -17,9 +17,15 @@
 
 ## 运行方式
 
-需要 JDK 17 或更高版本。
+需要 JDK 17 或更高版本，以及 JavaFX SDK。
 
 当前工作区如果存在 `.jdk` 目录，`run.bat` 会自动优先使用里面的便携 JDK；否则会使用系统 PATH 里的 `java` / `javac`。
+
+如果没有 `.javafx` 目录，先执行：
+
+```bat
+setup-javafx.bat
+```
 
 ```bat
 run.bat
@@ -28,16 +34,16 @@ run.bat
 或者手动执行：
 
 ```bat
-javac -encoding UTF-8 -d out src\main\java\com\shadowclash\ShadowClash.java
-java -cp out com.shadowclash.ShadowClash
+javac --module-path .javafx\lib --add-modules javafx.controls,javafx.swing -encoding UTF-8 -d out src\main\java\com\shadowclash\*.java
+java -Dprism.order=sw --module-path .javafx\lib --add-modules javafx.controls,javafx.swing -cp out com.shadowclash.ShadowClashFX
 ```
 
 Smoke test：
 
 ```bat
 build.bat
-.jdk\bin\javac.exe -encoding UTF-8 -cp out -d out src\test\java\com\shadowclash\SmokeTest.java
-.jdk\bin\java.exe -cp out com.shadowclash.SmokeTest
+.jdk\bin\javac.exe --module-path .javafx\lib --add-modules javafx.controls,javafx.swing -encoding UTF-8 -cp out -d out src\test\java\com\shadowclash\SmokeTest.java
+.jdk\bin\java.exe --module-path .javafx\lib --add-modules javafx.controls,javafx.swing -cp out com.shadowclash.SmokeTest
 ```
 
 ## 操作
@@ -77,9 +83,11 @@ assets/
   processed/       游戏实际加载的素材
   source/          本地原始下载素材包，仓库不需要提交
 src/main/java/
+  com/shadowclash/ShadowClashFX.java     JavaFX 主入口
   com/shadowclash/ShadowClash.java
 build.bat
 run.bat
+setup-javafx.bat
 CREDITS.md
 ```
 
