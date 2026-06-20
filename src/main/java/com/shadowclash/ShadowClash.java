@@ -291,8 +291,6 @@ final class GamePanel extends JPanel implements Runnable {
             aiController.update(dt, p2, p1, audio);
         }
 
-        p1.faceToward(p2);
-        p2.faceToward(p1);
         p1.update(dt);
         p2.update(dt);
         resolveCollision();
@@ -320,8 +318,7 @@ final class GamePanel extends JPanel implements Runnable {
             fighter.vx = approach(fighter.vx, 0, 1500 * dt);
         } else if (fighter.canMove()) {
             if (move != 0.0) {
-                fighter.vx = move * fighter.speed;
-                fighter.facing = move > 0 ? 1 : -1;
+                fighter.moveHorizontally(move);
             } else if (fighter.onGround) {
                 fighter.vx = approach(fighter.vx, 0, 1800 * dt);
             }
@@ -1143,6 +1140,14 @@ final class Fighter {
 
     boolean canAct() {
         return !dead && hitStun <= 0 && currentStrike == null && dashTimer <= 0;
+    }
+
+    void moveHorizontally(double direction) {
+        if (direction == 0.0) {
+            return;
+        }
+        vx = direction * speed;
+        facing = direction > 0 ? 1 : -1;
     }
 
     void jump() {

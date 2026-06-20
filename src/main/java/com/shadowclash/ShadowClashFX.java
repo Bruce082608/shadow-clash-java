@@ -271,8 +271,6 @@ public final class ShadowClashFX extends Application {
             aiController.update(dt, p2, p1, audio);
         }
 
-        p1.faceToward(p2);
-        p2.faceToward(p1);
         p1.update(dt);
         p2.update(dt);
         resolveCollision();
@@ -298,8 +296,7 @@ public final class ShadowClashFX extends Application {
             fighter.vx = approach(fighter.vx, 0, 1500 * dt);
         } else if (fighter.canMove()) {
             if (move != 0.0) {
-                fighter.vx = move * fighter.speed;
-                fighter.facing = move > 0 ? 1 : -1;
+                fighter.moveHorizontally(move);
             } else if (fighter.onGround) {
                 fighter.vx = approach(fighter.vx, 0, 1800 * dt);
             }
